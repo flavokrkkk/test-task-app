@@ -5,11 +5,11 @@ import { IRoute } from "../models/IRoute";
 
 export const publicRoutes = <IRoute[]>[
   {
-    path: RoutesName.LOGIN_ROUTE,
+    path: RoutesName.HELLO,
     component: AuthPage,
   },
   {
-    path: RoutesName.REGISTRATION_ROUTE,
+    path: RoutesName.AUTHORIZATION_ROUTE,
     component: AuthPage,
   },
 ];

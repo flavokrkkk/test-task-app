@@ -1,9 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { UserState } from "./types";
-import { IUser } from "../../../models/IUser";
 
 const initialState = <UserState>{
-  user: {},
+  userToken: {},
   isAuth: false,
 };
 
@@ -13,10 +12,6 @@ export const userSlice = createSlice({
   reducers: {
     toggleIsAuth: (state, { payload }: PayloadAction<boolean>) => {
       state.isAuth = payload;
-    },
-
-    setUser: (state, { payload }: PayloadAction<IUser>) => {
-      state.user = payload;
     },
   },
 });

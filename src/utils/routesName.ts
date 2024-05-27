@@ -1,5 +1,5 @@
-export enum RoutesName {
-  HOME = "/",
-  LOGIN_ROUTE = "/login",
-  REGISTRATION_ROUTE = "/registration",
+export const enum RoutesName {
+  HOME = "/home",
+  HELLO = "/",
+  AUTHORIZATION_ROUTE = "/authorization",
 }

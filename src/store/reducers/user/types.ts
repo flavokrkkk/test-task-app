@@ -1,6 +1,6 @@
-import { IUser } from "../../../models/IUser";
+import { IToken } from "../../../models/IToken";
 
 export interface UserState {
-  user: IUser;
+  userToken: IToken;
   isAuth: boolean;
 }
