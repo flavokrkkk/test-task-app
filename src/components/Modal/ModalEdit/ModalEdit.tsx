@@ -11,17 +11,17 @@ import { DataSelectors } from "../../../store/selectors";
 import { useActions } from "../../../hooks/useActions";
 
 interface ModalEditProps {
-  visible: boolean;
-  setVisible: (active: boolean) => void;
+  isVisible: boolean;
+  setIsVisible: (active: boolean) => void;
 }
 
-const ModalEdit: FC<ModalEditProps> = ({ visible, setVisible }) => {
+const ModalEdit: FC<ModalEditProps> = ({ isVisible, setIsVisible }) => {
   const { instance } = useAppSelector(DataSelectors);
 
   const { setInstance, editAsyncData } = useActions();
 
   const handleModalClose = () => {
-    setVisible(false);
+    setIsVisible(false);
   };
 
   const handleChnageCurrentData: ChangeEventHandler<HTMLInputElement> = (
@@ -32,14 +32,14 @@ const ModalEdit: FC<ModalEditProps> = ({ visible, setVisible }) => {
 
   const handleAsyncCurrentData = () => {
     editAsyncData(instance);
-    setVisible(false);
+    setIsVisible(false);
   };
 
   return (
     <Modal
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      open={visible}
+      open={isVisible}
       onClose={handleModalClose}
     >
       <ModalContent>

@@ -10,9 +10,12 @@ export const AuthContainer = styled(Container)({
 
 export const AuthWrapper = styles.div`
     border: 1px solid black;
-    padding: 30px;
+    border-radius: 20px;
+    padding: 40px;
 `;
 
 export const TypographyTitle = styled(Typography)({
   textAlign: "center",
+  fontWeight: 300,
+  marginBottom: 20,
 });

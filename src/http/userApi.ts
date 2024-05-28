@@ -1,15 +1,10 @@
-import { AxiosResponse } from "axios";
-import { $host } from ".";
-import { IToken } from "../models/IToken";
+import { ServiceApi } from "./serviceApi";
 
-export const authorization = async (username: string, password: string) => {
-  const { data } = await $host.post<AxiosResponse<IToken>>(
-    "/ru/data/v3/testmethods/docs/login",
-    {
-      username: `user${username}`,
-      password: password,
-    }
-  );
+export const authorizeUserAsync = async (
+  username: string,
+  password: string
+) => {
+  const { data } = await ServiceApi.authorizeUserAsync(username, password);
   localStorage.setItem("token", data.data.token);
   return data.data;
 };

@@ -1,20 +1,20 @@
 import { TableCell, TableRow } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IData } from "../../models/IData";
 import { FC } from "react";
-import { useActions } from "../../hooks/useActions";
-import ModalEditData from "../Modal/ModalEdit/ModalEdit";
+import { IData } from "../../../models/IData";
+import { useActions } from "../../../hooks/useActions";
+import ModalEdit from "../../Modal/ModalEdit/ModalEdit";
 
 interface TableDataRowProps {
-  dat: IData;
+  row: IData;
   deleteAsyncData: (id: string) => void;
   isVisibleEditModal: boolean;
   setIsVisibleEditModal: (active: boolean) => void;
 }
 
 const TableDataRow: FC<TableDataRowProps> = ({
-  dat,
+  row,
   deleteAsyncData,
   setIsVisibleEditModal,
   isVisibleEditModal,
@@ -22,18 +22,18 @@ const TableDataRow: FC<TableDataRowProps> = ({
   const { setInstance } = useActions();
 
   const handleDeletCell = () => {
-    deleteAsyncData(dat.id!);
+    deleteAsyncData(row.id!);
   };
 
   const handleOpenModal = () => {
     setIsVisibleEditModal(true);
-    setInstance(dat);
+    setInstance(row);
   };
 
   return (
     <>
       <TableRow>
-        {Object.values(dat).map((_, i, arr) => (
+        {Object.values(row).map((_, i, arr) => (
           <TableCell>{arr[i + 1]}</TableCell>
         ))}
         <TableCell onClick={handleOpenModal}>
@@ -44,9 +44,9 @@ const TableDataRow: FC<TableDataRowProps> = ({
           <DeleteIcon />
         </TableCell>
       </TableRow>
-      <ModalEditData
-        visible={isVisibleEditModal}
-        setVisible={setIsVisibleEditModal}
+      <ModalEdit
+        isVisible={isVisibleEditModal}
+        setIsVisible={setIsVisibleEditModal}
       />
     </>
   );

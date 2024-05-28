@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import TableData from "../../components/TableData/TableData";
 import { useActions } from "../../hooks/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { DataSelectors } from "../../store/selectors";
 import { Button } from "@mui/material";
 import { ButtonModalWrapper, HomeContainer } from "./styles";
-import ModalCreate from "../../components/ModalCreateData/ModalCreate";
+import ModalCreate from "../../components/Modal/ModalCreate/ModalCreate";
+import TableData from "../../components/Table/TableData/TableData";
 
 const HomePage = () => {
   const { fetchAsyncData } = useActions();
@@ -25,8 +25,8 @@ const HomePage = () => {
     <HomeContainer>
       <TableData data={data} />
       <ModalCreate
-        visible={isVisibleCreateModal}
-        setVisible={setIsVisibleCreateModal}
+        isVisible={isVisibleCreateModal}
+        setIsVisible={setIsVisibleCreateModal}
       />
 
       <ButtonModalWrapper>

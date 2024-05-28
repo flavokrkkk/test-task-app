@@ -6,16 +6,16 @@ import {
   ModalInputContainer,
   ModalTitle,
 } from "./styled";
-import { IData } from "../../models/IData";
-import { useActions } from "../../hooks/useActions";
-import { patternData } from "../../utils/patternData";
+import { IData } from "../../../models/IData";
+import { useActions } from "../../../hooks/useActions";
+import { patternData } from "../../../utils/patternData";
 
 interface ModalCreateProps {
-  visible: boolean;
-  setVisible: (active: boolean) => void;
+  isVisible: boolean;
+  setIsVisible: (active: boolean) => void;
 }
 
-const ModalCreate: FC<ModalCreateProps> = ({ visible, setVisible }) => {
+const ModalCreate: FC<ModalCreateProps> = ({ isVisible, setIsVisible }) => {
   const { createAsyncData } = useActions();
 
   const [dataRequest, setDataRequest] = useState<IData>(patternData);
@@ -30,18 +30,18 @@ const ModalCreate: FC<ModalCreateProps> = ({ visible, setVisible }) => {
   const handleCreateData = () => {
     createAsyncData(dataRequest);
     setDataRequest(patternData);
-    setVisible(false);
+    setIsVisible(false);
   };
 
   const handleModalClose = () => {
-    setVisible(false);
+    setIsVisible(false);
   };
 
   return (
     <Modal
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      open={visible}
+      open={isVisible}
       onClose={handleModalClose}
     >
       <ModalContent>

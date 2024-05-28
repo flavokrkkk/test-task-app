@@ -7,9 +7,13 @@ const $host = axios.create({
 
 const $authHost = axios.create({
   baseURL: baseUrl.REACT_APP_API_URL,
-  headers: {
-    "x-auth": localStorage.getItem("token"),
-  },
 });
+
+const authInterceptor = (config: any) => {
+  config.headers["x-auth"] = localStorage.getItem("token");
+  return config;
+};
+
+$authHost.interceptors.request.use(authInterceptor);
 
 export { $host, $authHost };

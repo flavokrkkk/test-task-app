@@ -6,14 +6,14 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { IData } from "../../models/IData";
 import { FC, useState } from "react";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { DataSelectors } from "../../store/selectors";
+import { IData } from "../../../models/IData";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+import { DataSelectors } from "../../../store/selectors";
+import { useActions } from "../../../hooks/useActions";
 import { TableDataContainer } from "./styles";
-import { useActions } from "../../hooks/useActions";
+import TableDataRow from "../TableRow/TableRow";
 
-import TableDataRow from "../TableDataRow/TableDataRow";
 interface TableDataProps {
   data: IData[];
 }
@@ -38,10 +38,10 @@ const TableData: FC<TableDataProps> = ({ data }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((dat) => (
+              {data.map((row) => (
                 <TableDataRow
                   isVisibleEditModal={isVisibleEditModal}
-                  dat={dat}
+                  row={row}
                   deleteAsyncData={deleteAsyncData}
                   setIsVisibleEditModal={setIsVisibleEditModal}
                 />
