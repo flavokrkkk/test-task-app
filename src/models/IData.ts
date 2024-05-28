@@ -1,5 +1,5 @@
 export interface IData {
-  id: string;
+  id?: string;
   documentStatus: string;
   employeeNumber: string;
   documentType: string;

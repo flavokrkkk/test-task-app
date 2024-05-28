@@ -1,9 +1,10 @@
-import { TableContainer, styled } from "@mui/material";
+import styled from "styled-components";
 
-export const TableDataContainer = styled(TableContainer)({
-  display: "flex",
-  alignItems: "center",
-  height: "calc(90vh - 64px)",
-  width: 1000,
-  margin: "0 auto",
-});
+export const TableDataContainer = styled.div`
+  alignitems: center;
+  max-height: 600px;
+  overflow: auto;
+  margin: 40px auto;
+  border: 1px solid lightgray;
+  padding: 10px;
+`;

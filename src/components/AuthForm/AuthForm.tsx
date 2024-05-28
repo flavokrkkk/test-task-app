@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEventHandler, FC, useState } from "react";
 import { DownFormWrapper } from "./styles";
 
 interface AuthFormProps {
@@ -10,33 +10,38 @@ const AuthForm: FC<AuthFormProps> = ({ handleAuthorization }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChangeUsername = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     setUsername(event.target.value);
   };
 
-  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword: ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     setPassword(event.target.value);
   };
 
   const handleAuthorizationCustomer = () => {
     handleAuthorization(username, password);
   };
+
   return (
     <form onSubmit={handleAuthorizationCustomer}>
       <TextField
+        fullWidth
         size="small"
         placeholder="Name"
         variant="outlined"
-        fullWidth
         margin="normal"
         value={username}
         onChange={handleChangeUsername}
       />
       <TextField
+        fullWidth
         size="small"
         placeholder="Password"
         variant="outlined"
-        fullWidth
         margin="normal"
         type="password"
         value={password}
