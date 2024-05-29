@@ -6,5 +6,6 @@ export const TableDataContainer = styled.div`
   overflow: auto;
   margin: 40px auto;
   border: 1px solid lightgray;
-  padding: 10px;
+  padding: 15px;
+  border-radius: 30px;
 `;

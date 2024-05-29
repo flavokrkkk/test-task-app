@@ -5,7 +5,7 @@ const initialState = <UserState>{
   userToken: {},
   isAuth: false,
   isLoading: false,
-  error: null,
+  authError: null,
 };
 
 export const userSlice = createSlice({
@@ -14,15 +14,15 @@ export const userSlice = createSlice({
   reducers: {
     toggleIsLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload;
-      state.error = null;
+      state.authError = null;
     },
     toggleIsAuth: (state, { payload }: PayloadAction<boolean>) => {
       state.isAuth = payload;
       state.isLoading = false;
-      state.error = null;
+      state.authError = null;
     },
-    setError: (state, { payload }: PayloadAction<string>) => {
-      state.error = payload;
+    setErrorAuth: (state, { payload }: PayloadAction<string>) => {
+      state.authError = payload;
       state.isLoading = false;
     },
   },

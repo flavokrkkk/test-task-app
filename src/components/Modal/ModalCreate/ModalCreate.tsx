@@ -1,5 +1,5 @@
 import { Button, Modal, TextField } from "@mui/material";
-import { ChangeEventHandler, FC, useState } from "react";
+import { ChangeEventHandler, FC, useEffect, useState } from "react";
 import {
   ButtonWrapper,
   ModalContent,
@@ -20,6 +20,8 @@ const ModalCreate: FC<ModalCreateProps> = ({ isVisible, setIsVisible }) => {
 
   const [dataRequest, setDataRequest] = useState<IData>(patternData);
 
+  const [isDisabled, setIsDisabled] = useState(true);
+
   const handleChangeData: ChangeEventHandler<HTMLInputElement> = (event) => {
     setDataRequest({
       ...dataRequest,
@@ -36,6 +38,24 @@ const ModalCreate: FC<ModalCreateProps> = ({ isVisible, setIsVisible }) => {
   const handleModalClose = () => {
     setIsVisible(false);
   };
+
+  useEffect(() => {
+    dataRequest.documentName &&
+    dataRequest.documentStatus &&
+    dataRequest.documentType &&
+    dataRequest.employeeNumber &&
+    dataRequest.companySignatureName &&
+    dataRequest.employeeSignatureName
+      ? setIsDisabled(false)
+      : setIsDisabled(true);
+  }, [
+    dataRequest.documentName.length,
+    dataRequest.documentStatus.length,
+    dataRequest.documentType.length,
+    dataRequest.employeeNumber.length,
+    dataRequest.companySignatureName.length,
+    dataRequest.employeeSignatureName.length,
+  ]);
 
   return (
     <Modal
@@ -93,8 +113,15 @@ const ModalCreate: FC<ModalCreateProps> = ({ isVisible, setIsVisible }) => {
           />
         </ModalInputContainer>
         <ButtonWrapper>
-          <Button variant="outlined" onClick={handleCreateData}>
+          <Button
+            disabled={isDisabled}
+            variant="outlined"
+            onClick={handleCreateData}
+          >
             Добавить
+          </Button>
+          <Button variant="outlined" color="error" onClick={handleModalClose}>
+            Закрыть
           </Button>
         </ButtonWrapper>
       </ModalContent>

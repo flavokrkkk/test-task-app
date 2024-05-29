@@ -1,10 +1,10 @@
 import { AppBar, Box, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { ToolbarWrapper } from "./styles";
-import { useActions } from "../../../hooks/useActions";
-import { useAppSelector } from "../../../hooks/useAppSelector";
-import { UserSelectors } from "../../../store/selectors";
-import { RoutesName } from "../../../utils/routesName";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { UserSelectors } from "../../store/selectors";
+import { useActions } from "../../hooks/useActions";
+import { RoutesName } from "../../utils/routesName";
 
 const NavBar = () => {
   const { isAuth } = useAppSelector(UserSelectors);

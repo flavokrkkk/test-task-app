@@ -4,4 +4,6 @@ export interface DataState {
   data: IData[];
   tableTitle: string[];
   instance: IData;
+  isLoading: boolean;
+  error: null | string;
 }

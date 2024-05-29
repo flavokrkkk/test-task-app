@@ -12,6 +12,7 @@ export const AuthWrapper = styles.div`
     border: 1px solid black;
     border-radius: 20px;
     padding: 40px;
+    max-width: 500px;
 `;
 
 export const TypographyTitle = styled(Typography)({

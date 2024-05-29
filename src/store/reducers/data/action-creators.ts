@@ -13,7 +13,6 @@ export const DataActionCreators = {
       const nameTab = [...new Set(objKey.flat())];
 
       dispatch(DataActionCreators.setTableTitle(nameTab));
-      console.log(nameTab);
     } catch (err) {
       console.log(err);
     }

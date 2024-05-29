@@ -7,7 +7,6 @@ import HelloPage from "../pages/HelloPage/HelloPage";
 
 const AppRouter = () => {
   const { isAuth } = useAppSelector(UserSelectors);
-  console.log(isAuth);
   return (
     <Routes>
       {isAuth &&

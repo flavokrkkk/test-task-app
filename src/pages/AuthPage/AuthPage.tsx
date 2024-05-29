@@ -6,15 +6,15 @@ import AuthForm from "../../components/Form/AuthForm";
 import { authorizeUserAsync } from "../../http/userApi";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { UserSelectors } from "../../store/selectors";
-import { CircularProgress } from "@mui/material";
 import ModalError from "../../components/Modal/ModalError/ModalError";
 import { useState } from "react";
+import Loader from "../../components/Loader/Loader";
 const AuthPage = () => {
   const navigate = useNavigate();
 
-  const { toggleIsAuth, toggleIsLoading, setError } = useActions();
+  const { toggleIsAuth, toggleIsLoading, setErrorAuth } = useActions();
 
-  const { isLoading, error } = useAppSelector(UserSelectors);
+  const { isLoading, authError } = useAppSelector(UserSelectors);
 
   const [isVisibleModalError, setIsVisibleModalError] = useState(false);
 
@@ -28,16 +28,13 @@ const AuthPage = () => {
         navigate(RoutesName.HOME);
       }
     } catch (err) {
-      setError(`${err}`);
+      setErrorAuth(`${err}`);
+      setIsVisibleModalError(true);
     }
   };
 
   if (isLoading) {
-    return (
-      <AuthContainer>
-        <CircularProgress disableShrink />
-      </AuthContainer>
-    );
+    return <Loader />;
   }
 
   return (
@@ -48,7 +45,7 @@ const AuthPage = () => {
       </AuthWrapper>
       <ModalError
         isVisible={isVisibleModalError}
-        error={error}
+        error={authError}
         setIsVisible={setIsVisibleModalError}
       />
     </AuthContainer>

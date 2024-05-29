@@ -1,69 +1,51 @@
-import { Button, TextField } from "@mui/material";
-import { ChangeEventHandler, FC, useEffect, useState } from "react";
+import { Button } from "@mui/material";
+import { FC, useEffect, useState } from "react";
 import { DownFormWrapper } from "./styles";
+import { SubmitHandler, useForm } from "react-hook-form";
+import ValidateInput from "../Input/ValidateInput";
+import { IAuth } from "../../models/IAuth";
 
 interface AuthFormProps {
   handleAuthorization: (username: string, password: string) => void;
 }
 
 const AuthForm: FC<AuthFormProps> = ({ handleAuthorization }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  const [errorName, setErrorName] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<IAuth>({
+    mode: "onChange",
+  });
 
-  const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    setUsername(event.target.value);
-    username.length === 0 ? setErrorName(true) : setErrorName(false);
+  const handleAuthorizationCustomer: SubmitHandler<IAuth> = (data) => {
+    handleAuthorization(data.username, data.password);
+    reset();
   };
 
-  const handleChangePassword: ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    setPassword(event.target.value);
-  };
-
-  const handleAuthorizationCustomer = () => {
-    handleAuthorization(username, password);
-  };
   useEffect(() => {
-    username.length === 0 ? setErrorName(true) : setErrorName(false);
-    password.length === 0 ? setErrorPassword(true) : setErrorPassword(false);
-  }, [username.length, password.length]);
+    const subscription = watch((value) => {
+      value.username && value.password
+        ? setIsDisabled(false)
+        : setIsDisabled(true);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   return (
-    <form onSubmit={handleAuthorizationCustomer}>
-      <TextField
-        fullWidth
-        size="small"
-        placeholder="Name"
-        variant="outlined"
-        error={errorName}
-        helperText={errorName && "Пожалуйста заполните поле"}
-        margin="normal"
-        value={username}
-        onChange={handleChangeUsername}
-      />
-      <TextField
-        fullWidth
-        size="small"
-        placeholder="Password"
-        variant="outlined"
-        margin="normal"
-        error={errorPassword}
-        helperText={errorPassword && "Пожалуйста заполните поле"}
-        type="password"
-        value={password}
-        onChange={handleChangePassword}
-      />
+    <form onSubmit={handleSubmit(handleAuthorizationCustomer)}>
+      <ValidateInput errors={errors} register={register} />
       <DownFormWrapper>
         <Button
+          disabled={isDisabled}
           variant="contained"
           color="primary"
           size="large"
-          onClick={handleAuthorizationCustomer}
+          type="submit"
         >
           Войти
         </Button>

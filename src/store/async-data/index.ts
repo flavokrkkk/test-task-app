@@ -12,6 +12,8 @@ export const AsyncDataActions = {
   setTableTitle: DataActions.setTableTitle,
   createTableCell: DataActions.createTableCell,
   deleteTableCell: DataActions.deleteTableCell,
+  setIsLoading: DataActions.toggleIsLoading,
+  setError: DataActions.setError,
 
   fetchAsyncData: createAsyncThunk<
     IData[] | string,
@@ -19,6 +21,7 @@ export const AsyncDataActions = {
     { rejectValue: string; dispatch: AppDispatch }
   >("data/fetchAsyncData", async (_, { dispatch, rejectWithValue }) => {
     try {
+      dispatch(AsyncDataActions.setIsLoading(true));
       const { data } = await $authHost.get<AxiosResponse<IData[]>>(
         secondaryUrl.GET_TABLE_URL
       );
@@ -28,6 +31,11 @@ export const AsyncDataActions = {
       dispatch(AsyncDataActions.setTableTitle(nameTab));
       return data.data;
     } catch (err) {
+      dispatch(
+        AsyncDataActions.setError(
+          `Проблемы на стороне сервера, попробуйте позже!${err}`
+        )
+      );
       return rejectWithValue(`${err}`);
     }
   }),
@@ -40,6 +48,7 @@ export const AsyncDataActions = {
     "data/createAsyncData",
     async (requestParams: IData, { rejectWithValue, dispatch }) => {
       try {
+        dispatch(AsyncDataActions.setIsLoading(true));
         const { data } = await $authHost.post<AxiosResponse<IData>>(
           secondaryUrl.POST_ROW_URL,
           requestParams
@@ -47,6 +56,9 @@ export const AsyncDataActions = {
         dispatch(AsyncDataActions.createTableCell(data.data));
         return data.data;
       } catch (err) {
+        dispatch(
+          AsyncDataActions.setError(`Не удалось создать строку: ${err}`)
+        );
         return rejectWithValue(`${err}`);
       }
     }
@@ -60,12 +72,16 @@ export const AsyncDataActions = {
     "data/deleteAsyncData",
     async (id: string, { dispatch, rejectWithValue }) => {
       try {
+        dispatch(AsyncDataActions.setIsLoading(true));
         const { data } = await $authHost.delete<AxiosResponse<IData>>(
           secondaryUrl.DELETE_ROW_URL + id
         );
         dispatch(AsyncDataActions.deleteTableCell(id));
         return data.data;
       } catch (err) {
+        dispatch(
+          AsyncDataActions.setError(`Не удалось удалить строку: ${err}`)
+        );
         return rejectWithValue(`${err}`);
       }
     }
@@ -85,6 +101,7 @@ export const AsyncDataActions = {
     "data/editAsyncData",
     async (requestParams: IData, { getState, dispatch, rejectWithValue }) => {
       try {
+        dispatch(AsyncDataActions.setIsLoading(true));
         const { data } = await $authHost.post<AxiosResponse<IData>>(
           secondaryUrl.EDIT_ROW_URL + requestParams.id,
           requestParams
@@ -96,6 +113,9 @@ export const AsyncDataActions = {
         dispatch(AsyncDataActions.setAsyncData(editCurrentData));
         return data.data;
       } catch (err) {
+        dispatch(
+          AsyncDataActions.setError(`Не удалось отредактировать строку: ${err}`)
+        );
         return rejectWithValue(`${err}`);
       }
     }

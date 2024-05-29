@@ -8,5 +8,5 @@ export const ButtonModalWrapper = styled.div`
 
 export const HomeContainer = styled.div`
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 220px auto;
 `;

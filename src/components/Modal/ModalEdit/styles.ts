@@ -27,6 +27,8 @@ export const ModalInputContainer = styles.div`
 `;
 
 export const ButtonWrapper = styles.div`
-    text-align: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+    margin-top: 40px;
 `;

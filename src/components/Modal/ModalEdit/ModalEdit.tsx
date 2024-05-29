@@ -94,6 +94,9 @@ const ModalEdit: FC<ModalEditProps> = ({ isVisible, setIsVisible }) => {
           <Button variant="outlined" onClick={handleAsyncCurrentData}>
             Сохранить
           </Button>
+          <Button variant="outlined" color="error" onClick={handleModalClose}>
+            Закрыть
+          </Button>
         </ButtonWrapper>
       </ModalContent>
     </Modal>
