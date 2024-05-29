@@ -50,7 +50,7 @@ const HomePage = () => {
       <ButtonModalWrapper>
         <Button
           color="primary"
-          variant="contained"
+          variant="outlined"
           size="large"
           onClick={handleModalOnOpen}
         >
