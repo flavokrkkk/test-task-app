@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { IData } from "../../../models/IData";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import { DataSelectors } from "../../../store/selectors";
@@ -16,14 +16,18 @@ import TableDataRow from "../TableRow/TableRow";
 
 interface TableDataProps {
   data: IData[];
+  isVisibleEditModal: boolean;
+  setIsVisibleEditModal: (active: boolean) => void;
 }
 
-const TableData: FC<TableDataProps> = ({ data }) => {
+const TableData: FC<TableDataProps> = ({
+  data,
+  isVisibleEditModal,
+  setIsVisibleEditModal,
+}) => {
   const { tableTitle } = useAppSelector(DataSelectors);
 
   const { deleteAsyncData } = useActions();
-
-  const [isVisibleEditModal, setIsVisibleEditModal] = useState(false);
 
   return (
     <>
@@ -33,18 +37,21 @@ const TableData: FC<TableDataProps> = ({ data }) => {
             <TableHead>
               <TableRow>
                 {tableTitle.map((_, i, arr) => (
-                  <TableCell>{arr[i + 1]}</TableCell>
+                  <TableCell key={i}>{arr[i + 1]}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((row) => (
-                <TableDataRow
-                  isVisibleEditModal={isVisibleEditModal}
-                  row={row}
-                  deleteAsyncData={deleteAsyncData}
-                  setIsVisibleEditModal={setIsVisibleEditModal}
-                />
+                <>
+                  <TableDataRow
+                    key={row.id}
+                    isVisibleEditModal={isVisibleEditModal}
+                    row={row}
+                    deleteAsyncData={deleteAsyncData}
+                    setIsVisibleEditModal={setIsVisibleEditModal}
+                  />
+                </>
               ))}
             </TableBody>
           </Table>

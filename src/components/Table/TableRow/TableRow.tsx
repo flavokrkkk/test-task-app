@@ -4,7 +4,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { FC } from "react";
 import { IData } from "../../../models/IData";
 import { useActions } from "../../../hooks/useActions";
-import ModalEdit from "../../Modal/ModalEdit/ModalEdit";
 
 interface TableDataRowProps {
   row: IData;
@@ -17,7 +16,6 @@ const TableDataRow: FC<TableDataRowProps> = ({
   row,
   deleteAsyncData,
   setIsVisibleEditModal,
-  isVisibleEditModal,
 }) => {
   const { setInstance } = useActions();
 
@@ -34,7 +32,7 @@ const TableDataRow: FC<TableDataRowProps> = ({
     <>
       <TableRow>
         {Object.values(row).map((_, i, arr) => (
-          <TableCell>{arr[i + 1]}</TableCell>
+          <TableCell key={i}>{arr[i + 1]}</TableCell>
         ))}
         <TableCell onClick={handleOpenModal}>
           <EditIcon />
@@ -44,10 +42,6 @@ const TableDataRow: FC<TableDataRowProps> = ({
           <DeleteIcon />
         </TableCell>
       </TableRow>
-      <ModalEdit
-        isVisible={isVisibleEditModal}
-        setIsVisible={setIsVisibleEditModal}
-      />
     </>
   );
 };

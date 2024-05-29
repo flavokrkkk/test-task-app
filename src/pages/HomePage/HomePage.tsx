@@ -8,6 +8,7 @@ import ModalCreate from "../../components/Modal/ModalCreate/ModalCreate";
 import TableData from "../../components/Table/TableData/TableData";
 import Loader from "../../components/Loader/Loader";
 import ModalError from "../../components/Modal/ModalError/ModalError";
+import ModalEdit from "../../components/Modal/ModalEdit/ModalEdit";
 
 const HomePage = () => {
   const { fetchAsyncData } = useActions();
@@ -15,6 +16,7 @@ const HomePage = () => {
   const [isVisibleCreateModal, setIsVisibleCreateModal] = useState(false);
 
   const [isVisibleModalError, setIsVisibleModalError] = useState(false);
+  const [isVisibleEditModal, setIsVisibleEditModal] = useState(false);
 
   const { data, isLoading, error } = useAppSelector(DataSelectors);
 
@@ -32,12 +34,19 @@ const HomePage = () => {
 
   return (
     <HomeContainer>
-      <TableData data={data} />
+      <TableData
+        data={data}
+        isVisibleEditModal={isVisibleEditModal}
+        setIsVisibleEditModal={setIsVisibleEditModal}
+      />
       <ModalCreate
         isVisible={isVisibleCreateModal}
         setIsVisible={setIsVisibleCreateModal}
       />
-
+      <ModalEdit
+        isVisible={isVisibleEditModal}
+        setIsVisible={setIsVisibleEditModal}
+      />
       <ButtonModalWrapper>
         <Button
           color="primary"

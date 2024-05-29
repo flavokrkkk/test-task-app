@@ -27,3 +27,8 @@ export const ProgressBarContainer = styled(Container)({
   alignItems: "center",
   height: "calc(90vh - 64px)",
 });
+
+export const style = {
+  backgroundColor: `transparent`,
+  opacity: "0.7",
+};

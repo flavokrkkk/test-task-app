@@ -30,5 +30,5 @@ export const ButtonWrapper = styles.div`
   display: flex;
   justify-content: center;
   gap: 40px;
-    margin-top: 40px;
+  margin-top: 40px;
 `;
