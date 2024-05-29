@@ -22,7 +22,7 @@
 <img src="https://github.com/flavokrkkk/test-task-app/blob/master/screens/2024-05-29_11-14-31.png">
 
 <h3>Токен помещается в LocalStorage при успешной авторизации пользователя, и благодаря этому после перезагрузки пользователь, который был авторизован остается в приложении, но также есть кнопка "Выйти" для принудительного выхода</h3>
-<img src="https://github.com/flavokrkkk/test-task-appt/blob/master/screens/2024-05-29_12-56-18.png">
+<img src="https://github.com/flavokrkkk/test-task-appt/blob/master/screens/2024-05-29_11-55-44.png">
 
 <h3>После успешного входа на главной странице мы видим таблицу с данными, которые подгружаются с помощью токена авторизации в заголовках запроса, также реализованы спиннеры загрузки/отправки данных, прикрелены к каждому запросу на сервер</h3>
 <img src="https://github.com/flavokrkkk/test-task-app/blob/master/screens/2024-05-29_11-15-14.png">
